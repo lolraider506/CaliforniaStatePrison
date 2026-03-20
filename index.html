@@ -4,64 +4,89 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>California State Prison</title>
+
+<meta property="og:title" content="California State Prison">
+<meta property="og:description" content="Official information hub for the California State Prison Roblox experience. Join our community and stay updated.">
+<meta property="og:url" content="https://california-state-prison.vercel.app/">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://cdn.discordapp.com/attachments/1472190802250829930/1484401659768733696/a7d1158d3eb4ae98f1c018b551c70583.png">
+
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Inter',sans-serif}
-body{background:linear-gradient(180deg,#0a0a0a,#111);color:#eaeaea;overflow-x:hidden}
-.container{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:20px}
-h1{font-size:3.2rem;font-weight:700;letter-spacing:1px}
-.subtitle{color:#9a9a9a;margin-top:10px;font-size:1.1rem}
+body{background:linear-gradient(180deg,#080808,#111);color:#eaeaea;overflow-x:hidden}
+
+.nav{position:fixed;top:0;width:100%;display:flex;justify-content:center;gap:20px;padding:15px;background:rgba(0,0,0,0.6);backdrop-filter:blur(10px);z-index:100}
+.nav button{background:#141414;border:1px solid #2a2a2a;color:#fff;padding:10px 18px;border-radius:10px;cursor:pointer;transition:.25s}
+.nav button:hover{background:#262626;transform:scale(1.05)}
+
+.section{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:80px 20px}
+
+h1{font-size:3rem;margin-bottom:10px}
+h2{font-size:2.2rem;margin-bottom:10px}
+p{color:#9a9a9a;max-width:600px}
+
 .buttons{margin-top:30px;display:flex;gap:15px;flex-wrap:wrap;justify-content:center}
-.btn{background:#151515;border:1px solid #2a2a2a;color:#fff;padding:13px 24px;border-radius:12px;cursor:pointer;transition:.3s;font-size:15px}
-.btn:hover{background:#262626;transform:translateY(-4px) scale(1.06);box-shadow:0 0 20px rgba(255,255,255,0.08)}
-.section{padding:90px 20px;text-align:center;max-width:1100px;margin:auto}
-.section h2{font-size:2.2rem;margin-bottom:10px}
-.section p{color:#9a9a9a;margin-top:5px}
+.btn{background:#151515;border:1px solid #2a2a2a;color:#fff;padding:13px 24px;border-radius:12px;cursor:pointer;transition:.3s}
+.btn:hover{background:#262626;transform:translateY(-4px) scale(1.05);box-shadow:0 0 20px rgba(255,255,255,0.08)}
+
 .team{display:flex;flex-wrap:wrap;justify-content:center;gap:30px;margin-top:40px}
-.card{background:rgba(20,20,20,0.9);border:1px solid #2a2a2a;border-radius:16px;padding:30px;width:280px;transition:.35s;position:relative;overflow:hidden}
-.card:hover{transform:translateY(-8px) scale(1.04);border-color:#3a3a3a;box-shadow:0 0 30px rgba(255,255,255,0.06)}
+.card{background:rgba(20,20,20,0.9);border:1px solid #2a2a2a;border-radius:16px;padding:30px;width:280px;transition:.35s}
+.card:hover{transform:translateY(-8px) scale(1.04);box-shadow:0 0 25px rgba(255,255,255,0.05)}
+
 .card img{width:90px;height:90px;border-radius:50%;margin-bottom:15px;border:2px solid #333}
-.name{font-weight:600;font-size:1.25rem;margin-bottom:5px}
+.name{font-weight:600;font-size:1.2rem}
 .role{color:#888;font-size:0.9rem;margin-bottom:15px}
-.info{margin-top:10px;text-align:left}
-.info div{margin-bottom:8px;font-size:0.9rem;color:#bdbdbd}
+
+.info{text-align:left;margin-top:10px}
+.info div{font-size:0.9rem;color:#bdbdbd;margin-bottom:6px}
 .info span{color:#fff}
+
 .link{color:#bdbdbd;text-decoration:none}
 .link:hover{color:#fff}
+
 .fade{opacity:0;transform:translateY(40px);transition:1s}
 .show{opacity:1;transform:translateY(0)}
+
 .cursor{display:inline-block;width:2px;height:1em;background:#fff;margin-left:4px;animation:blink .7s infinite}
 @keyframes blink{50%{opacity:0}}
-.bg-glow{position:fixed;width:500px;height:500px;background:radial-gradient(circle,rgba(255,255,255,0.05),transparent);top:20%;left:50%;transform:translateX(-50%);filter:blur(80px);z-index:-1}
+
+.bg{position:fixed;width:600px;height:600px;background:radial-gradient(circle,rgba(255,255,255,0.04),transparent);top:30%;left:50%;transform:translateX(-50%);filter:blur(100px);z-index:-1}
 </style>
 </head>
+
 <body>
 
-<div class="bg-glow"></div>
+<div class="bg"></div>
 
-<div class="container">
+<div class="nav">
+<button onclick="scrollToSection('general')">General Info</button>
+<button onclick="scrollToSection('team')">Meet The Team</button>
+</div>
+
+<div id="general" class="section fade">
 <h1 id="title"></h1>
-<div class="subtitle" id="subtitle"></div>
+<p id="subtitle"></p>
 
 <div class="buttons">
 <button class="btn" onclick="window.open('https://www.roblox.com/communities/33888997/California-State-Prison#!/about')">Join Roblox Group</button>
 <button class="btn">Game (Coming Soon)</button>
 <button class="btn" onclick="window.open('https://discord.gg/MYC3KuNtdq')">Join Discord</button>
 </div>
+
+<p style="margin-top:25px">
+California State Prison is a Roblox Prison RP game that was in development for years before finnaly it got released! We hope you enjoy the game and feel free to reach out to us in our discord server.
+</p>
 </div>
 
-<div class="section fade">
-<h2>About</h2>
-<p>We have wanted to make California State Prison for a while but never could really do it, but one day, somehow, we pulled it off!</p>
-</div>
-
-<div class="section fade">
+<div id="team" class="section fade">
 <h2>Meet the Team</h2>
 
 <div class="team">
 
 <div class="card">
-<img src="https://cdn.discordapp.com/attachments/1472190802250829930/1484401659768733696/a7d1158d3eb4ae98f1c018b551c70583.png?ex=69be1846&is=69bcc6c6&hm=a4a1c89e285cfa1a7b90444b7293e5d632c5ee4dea85e9d7162145f28df82e4b&">
+<img src="https://cdn.discordapp.com/attachments/1472190802250829930/1484401659768733696/a7d1158d3eb4ae98f1c018b551c70583.png">
 <div class="name">mhzbaby1199193</div>
 <div class="role">Owner</div>
 
@@ -77,7 +102,7 @@ h1{font-size:3.2rem;font-weight:700;letter-spacing:1px}
 </div>
 
 <div class="card">
-<img src="https://cdn.discordapp.com/attachments/1465411636385939581/1484206907307856063/Screenshot_2026-02-12_213303.png?ex=69be0ba5&is=69bcba25&hm=e3da46f4007ebe71f25e588a501828e49aa8be32a867174a30c32c8355c21a98&">
+<img src="https://cdn.discordapp.com/attachments/1465411636385939581/1484206907307856063/Screenshot_2026-02-12_213303.png">
 <div class="name">joshua_neww</div>
 <div class="role">Lead Developer</div>
 
@@ -120,6 +145,10 @@ setTimeout(typeSub,18);
 }
 
 typeTitle();
+
+function scrollToSection(id){
+document.getElementById(id).scrollIntoView({behavior:'smooth'});
+}
 
 const observer=new IntersectionObserver(entries=>{
 entries.forEach(entry=>{
