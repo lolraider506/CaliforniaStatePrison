@@ -17,30 +17,28 @@
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Inter',sans-serif}
-body{background:#050505;color:#fff;overflow-x:hidden}
+body{background:#0a0a0a;color:#fff;overflow-x:hidden;transition:background .4s}
 
-.bg{position:fixed;width:800px;height:800px;background:radial-gradient(circle,rgba(255,255,255,0.06),transparent);top:40%;left:50%;transform:translate(-50%,-50%);filter:blur(120px);z-index:-1}
+canvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:-2}
 
-.nav{position:fixed;top:0;width:100%;display:flex;justify-content:center;gap:15px;padding:14px;background:rgba(0,0,0,0.65);backdrop-filter:blur(12px);z-index:100;border-bottom:1px solid #1f1f1f}
+.bg-static{position:fixed;width:100%;height:100%;background:linear-gradient(180deg,#0a0a0a,#1a1a1a);z-index:-3;opacity:0;transition:.4s}
+
+.nav{position:fixed;top:0;width:100%;display:flex;justify-content:center;gap:12px;padding:14px;background:rgba(0,0,0,0.7);backdrop-filter:blur(12px);z-index:100;border-bottom:1px solid #1f1f1f}
 .nav button{background:transparent;border:1px solid #2a2a2a;color:#aaa;padding:10px 18px;border-radius:999px;cursor:pointer;transition:.3s}
 .nav button:hover{color:#fff;border-color:#fff;transform:translateY(-2px)}
 
 .section{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:100px 20px}
 
-h1{font-size:3.5rem;font-weight:900;letter-spacing:-1px}
+h1{font-size:3.5rem;font-weight:900}
 h2{font-size:2.4rem;margin-bottom:10px}
 p{color:#a0a0a0;max-width:650px}
 
-.hero{display:flex;flex-direction:column;align-items:center;gap:15px}
-
 .buttons{margin-top:30px;display:flex;gap:15px;flex-wrap:wrap;justify-content:center}
-.btn{background:linear-gradient(135deg,#1a1a1a,#111);border:1px solid #2a2a2a;color:#fff;padding:14px 26px;border-radius:14px;cursor:pointer;transition:.35s}
+.btn{background:#111;border:1px solid #2a2a2a;color:#fff;padding:14px 26px;border-radius:14px;cursor:pointer;transition:.35s}
 .btn:hover{transform:translateY(-5px) scale(1.06);box-shadow:0 10px 30px rgba(255,255,255,0.08)}
 
 .team{display:flex;flex-wrap:wrap;justify-content:center;gap:30px;margin-top:40px}
-.card{background:linear-gradient(180deg,#111,#0a0a0a);border:1px solid #222;border-radius:20px;padding:30px;width:280px;transition:.4s;position:relative;overflow:hidden}
-.card::before{content:'';position:absolute;width:120%;height:120%;background:radial-gradient(circle,rgba(255,255,255,0.08),transparent);top:-20%;left:-20%;opacity:0;transition:.4s}
-.card:hover::before{opacity:1}
+.card{background:#0e0e0e;border:1px solid #222;border-radius:20px;padding:30px;width:280px;transition:.4s}
 .card:hover{transform:translateY(-10px) scale(1.05)}
 
 .card img{width:90px;height:90px;border-radius:50%;margin-bottom:15px;border:2px solid #333;object-fit:cover}
@@ -61,13 +59,16 @@ p{color:#a0a0a0;max-width:650px}
 @keyframes blink{50%{opacity:0}}
 
 .updates-box{margin-top:30px;padding:25px 35px;border-radius:16px;background:#0d0d0d;border:1px solid #222}
-.updates-box p{color:#cfcfcf}
+
+.toggle{position:fixed;bottom:20px;right:20px;background:#111;border:1px solid #2a2a2a;color:#fff;padding:12px 18px;border-radius:12px;cursor:pointer;z-index:200}
+.toggle:hover{background:#1c1c1c}
 </style>
 </head>
 
 <body>
 
-<div class="bg"></div>
+<canvas id="bg"></canvas>
+<div class="bg-static" id="staticBg"></div>
 
 <div class="nav">
 <button onclick="scrollToSection('general')">Home</button>
@@ -75,8 +76,9 @@ p{color:#a0a0a0;max-width:650px}
 <button onclick="scrollToSection('updates')">Updates</button>
 </div>
 
+<button class="toggle" onclick="toggleAnim()">Toggle Animation</button>
+
 <div id="general" class="section fade">
-<div class="hero">
 <h1 id="title"></h1>
 <p id="subtitle"></p>
 
@@ -89,7 +91,6 @@ p{color:#a0a0a0;max-width:650px}
 <p style="margin-top:25px">
 California State Prison is a Roblox Prison RP game that was in development for years before finally being released. We hope you enjoy the experience and connect with us through our Discord community.
 </p>
-</div>
 </div>
 
 <div id="team" class="section fade">
@@ -138,6 +139,62 @@ California State Prison is a Roblox Prison RP game that was in development for y
 </div>
 
 <script>
+const canvas=document.getElementById("bg");
+const ctx=canvas.getContext("2d");
+let w,h,particles=[],anim=true;
+
+function resize(){
+w=canvas.width=window.innerWidth;
+h=canvas.height=window.innerHeight;
+}
+window.addEventListener("resize",resize);
+resize();
+
+for(let i=0;i<80;i++){
+particles.push({x:Math.random()*w,y:Math.random()*h,vx:(Math.random()-0.5)*0.6,vy:(Math.random()-0.5)*0.6});
+}
+
+function draw(){
+if(!anim)return;
+ctx.clearRect(0,0,w,h);
+
+for(let i=0;i<particles.length;i++){
+let p=particles[i];
+p.x+=p.vx;
+p.y+=p.vy;
+
+if(p.x<0||p.x>w)p.vx*=-1;
+if(p.y<0||p.y>h)p.vy*=-1;
+
+ctx.fillStyle="rgba(200,200,200,0.3)";
+ctx.beginPath();
+ctx.arc(p.x,p.y,2,0,Math.PI*2);
+ctx.fill();
+
+for(let j=i+1;j<particles.length;j++){
+let p2=particles[j];
+let dx=p.x-p2.x;
+let dy=p.y-p2.y;
+let dist=Math.sqrt(dx*dx+dy*dy);
+if(dist<120){
+ctx.strokeStyle="rgba(180,180,180,"+(1-dist/120)*0.2+")";
+ctx.beginPath();
+ctx.moveTo(p.x,p.y);
+ctx.lineTo(p2.x,p2.y);
+ctx.stroke();
+}
+}
+}
+requestAnimationFrame(draw);
+}
+draw();
+
+function toggleAnim(){
+anim=!anim;
+document.getElementById("staticBg").style.opacity=anim?0:1;
+if(anim)draw();
+}
+
 const titleText="California State Prison";
 const subText="Official Information Hub";
 let i=0,j=0;
