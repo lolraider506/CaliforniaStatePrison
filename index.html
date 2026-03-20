@@ -7,29 +7,37 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Inter',sans-serif}
-body{background:#0b0b0b;color:#eaeaea;overflow-x:hidden}
+body{background:linear-gradient(180deg,#0a0a0a,#111);color:#eaeaea;overflow-x:hidden}
 .container{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:20px}
-h1{font-size:3rem;font-weight:700;letter-spacing:1px}
+h1{font-size:3.2rem;font-weight:700;letter-spacing:1px}
 .subtitle{color:#9a9a9a;margin-top:10px;font-size:1.1rem}
 .buttons{margin-top:30px;display:flex;gap:15px;flex-wrap:wrap;justify-content:center}
-.btn{background:#151515;border:1px solid #2a2a2a;color:#fff;padding:12px 22px;border-radius:10px;cursor:pointer;transition:.25s;font-size:15px}
-.btn:hover{background:#262626;transform:translateY(-3px) scale(1.05)}
-.section{padding:80px 20px;text-align:center}
-.section h2{font-size:2rem;margin-bottom:10px}
-.team{display:flex;flex-wrap:wrap;justify-content:center;gap:25px;margin-top:30px}
-.card{background:#121212;border:1px solid #2a2a2a;border-radius:14px;padding:25px;width:260px;transition:.3s}
-.card:hover{transform:translateY(-6px) scale(1.03);border-color:#3a3a3a}
-.name{font-weight:600;font-size:1.2rem;margin-bottom:6px}
-.role{color:#888;font-size:0.9rem;margin-bottom:10px}
-.link{color:#bdbdbd;font-size:0.9rem;text-decoration:none;display:block;margin-top:5px}
+.btn{background:#151515;border:1px solid #2a2a2a;color:#fff;padding:13px 24px;border-radius:12px;cursor:pointer;transition:.3s;font-size:15px}
+.btn:hover{background:#262626;transform:translateY(-4px) scale(1.06);box-shadow:0 0 20px rgba(255,255,255,0.08)}
+.section{padding:90px 20px;text-align:center;max-width:1100px;margin:auto}
+.section h2{font-size:2.2rem;margin-bottom:10px}
+.section p{color:#9a9a9a;margin-top:5px}
+.team{display:flex;flex-wrap:wrap;justify-content:center;gap:30px;margin-top:40px}
+.card{background:rgba(20,20,20,0.9);border:1px solid #2a2a2a;border-radius:16px;padding:30px;width:280px;transition:.35s;position:relative;overflow:hidden}
+.card:hover{transform:translateY(-8px) scale(1.04);border-color:#3a3a3a;box-shadow:0 0 30px rgba(255,255,255,0.06)}
+.card img{width:90px;height:90px;border-radius:50%;margin-bottom:15px;border:2px solid #333}
+.name{font-weight:600;font-size:1.25rem;margin-bottom:5px}
+.role{color:#888;font-size:0.9rem;margin-bottom:15px}
+.info{margin-top:10px;text-align:left}
+.info div{margin-bottom:8px;font-size:0.9rem;color:#bdbdbd}
+.info span{color:#fff}
+.link{color:#bdbdbd;text-decoration:none}
 .link:hover{color:#fff}
-.fade{opacity:0;transform:translateY(30px);transition:1s}
+.fade{opacity:0;transform:translateY(40px);transition:1s}
 .show{opacity:1;transform:translateY(0)}
 .cursor{display:inline-block;width:2px;height:1em;background:#fff;margin-left:4px;animation:blink .7s infinite}
 @keyframes blink{50%{opacity:0}}
+.bg-glow{position:fixed;width:500px;height:500px;background:radial-gradient(circle,rgba(255,255,255,0.05),transparent);top:20%;left:50%;transform:translateX(-50%);filter:blur(80px);z-index:-1}
 </style>
 </head>
 <body>
+
+<div class="bg-glow"></div>
 
 <div class="container">
 <h1 id="title"></h1>
@@ -43,19 +51,45 @@ h1{font-size:3rem;font-weight:700;letter-spacing:1px}
 </div>
 
 <div class="section fade">
+<h2>About</h2>
+<p>California State Prison is a Roblox experience focused on immersive roleplay, realistic systems, and an active community. Join the group and stay connected through our Discord server for updates and events.</p>
+</div>
+
+<div class="section fade">
 <h2>Meet the Team</h2>
+
 <div class="team">
 
 <div class="card">
+<img src="https://cdn.discordapp.com/attachments/1472190802250829930/1484401659768733696/a7d1158d3eb4ae98f1c018b551c70583.png?ex=69be1846&is=69bcc6c6&hm=a4a1c89e285cfa1a7b90444b7293e5d632c5ee4dea85e9d7162145f28df82e4b&">
 <div class="name">mhzbaby1199193</div>
 <div class="role">Owner</div>
-<a class="link" href="https://www.roblox.com/users/2767974107/profile" target="_blank">MhzBaby4047</a>
+
+<div class="info">
+<div><span>Discord:</span> mhzbaby1199193</div>
+<div><span>User ID:</span> 1389111097629474900</div>
+</div>
+
+<div class="info">
+<div><span>Roblox:</span> <a class="link" href="https://www.roblox.com/users/2767974107/profile" target="_blank">MhzBaby4047</a></div>
+</div>
+
 </div>
 
 <div class="card">
+<img src="https://cdn.discordapp.com/attachments/1465411636385939581/1484206907307856063/Screenshot_2026-02-12_213303.png?ex=69be0ba5&is=69bcba25&hm=e3da46f4007ebe71f25e588a501828e49aa8be32a867174a30c32c8355c21a98&">
 <div class="name">joshua_neww</div>
 <div class="role">Lead Developer</div>
-<a class="link" href="https://www.roblox.com/users/3745240218/profile" target="_blank">markthebark2116</a>
+
+<div class="info">
+<div><span>Discord:</span> joshua_neww</div>
+<div><span>User ID:</span> 1465833498949455873</div>
+</div>
+
+<div class="info">
+<div><span>Roblox:</span> <a class="link" href="https://www.roblox.com/users/3745240218/profile" target="_blank">markthebark2116</a></div>
+</div>
+
 </div>
 
 </div>
@@ -63,14 +97,14 @@ h1{font-size:3rem;font-weight:700;letter-spacing:1px}
 
 <script>
 const titleText="California State Prison";
-const subText="Official Information Page";
+const subText="Official Information Hub";
 let i=0,j=0;
 
 function typeTitle(){
 if(i<titleText.length){
 document.getElementById("title").innerHTML+=titleText.charAt(i);
 i++;
-setTimeout(typeTitle,25);
+setTimeout(typeTitle,20);
 }else{
 document.getElementById("title").innerHTML+='<span class="cursor"></span>';
 typeSub();
@@ -81,7 +115,7 @@ function typeSub(){
 if(j<subText.length){
 document.getElementById("subtitle").innerHTML+=subText.charAt(j);
 j++;
-setTimeout(typeSub,20);
+setTimeout(typeSub,18);
 }
 }
 
