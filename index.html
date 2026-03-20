@@ -13,29 +13,35 @@
 
 <meta name="twitter:card" content="summary_large_image">
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Inter',sans-serif}
-body{background:linear-gradient(180deg,#080808,#111);color:#eaeaea;overflow-x:hidden}
+body{background:#050505;color:#fff;overflow-x:hidden}
 
-.nav{position:fixed;top:0;width:100%;display:flex;justify-content:center;gap:20px;padding:15px;background:rgba(0,0,0,0.6);backdrop-filter:blur(10px);z-index:100}
-.nav button{background:#141414;border:1px solid #2a2a2a;color:#fff;padding:10px 18px;border-radius:10px;cursor:pointer;transition:.25s}
-.nav button:hover{background:#262626;transform:scale(1.05)}
+.bg{position:fixed;width:800px;height:800px;background:radial-gradient(circle,rgba(255,255,255,0.06),transparent);top:40%;left:50%;transform:translate(-50%,-50%);filter:blur(120px);z-index:-1}
 
-.section{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:80px 20px}
+.nav{position:fixed;top:0;width:100%;display:flex;justify-content:center;gap:15px;padding:14px;background:rgba(0,0,0,0.65);backdrop-filter:blur(12px);z-index:100;border-bottom:1px solid #1f1f1f}
+.nav button{background:transparent;border:1px solid #2a2a2a;color:#aaa;padding:10px 18px;border-radius:999px;cursor:pointer;transition:.3s}
+.nav button:hover{color:#fff;border-color:#fff;transform:translateY(-2px)}
 
-h1{font-size:3rem;margin-bottom:10px}
-h2{font-size:2.2rem;margin-bottom:10px}
-p{color:#9a9a9a;max-width:600px}
+.section{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:100px 20px}
+
+h1{font-size:3.5rem;font-weight:900;letter-spacing:-1px}
+h2{font-size:2.4rem;margin-bottom:10px}
+p{color:#a0a0a0;max-width:650px}
+
+.hero{display:flex;flex-direction:column;align-items:center;gap:15px}
 
 .buttons{margin-top:30px;display:flex;gap:15px;flex-wrap:wrap;justify-content:center}
-.btn{background:#151515;border:1px solid #2a2a2a;color:#fff;padding:13px 24px;border-radius:12px;cursor:pointer;transition:.3s}
-.btn:hover{background:#262626;transform:translateY(-4px) scale(1.05);box-shadow:0 0 20px rgba(255,255,255,0.08)}
+.btn{background:linear-gradient(135deg,#1a1a1a,#111);border:1px solid #2a2a2a;color:#fff;padding:14px 26px;border-radius:14px;cursor:pointer;transition:.35s}
+.btn:hover{transform:translateY(-5px) scale(1.06);box-shadow:0 10px 30px rgba(255,255,255,0.08)}
 
 .team{display:flex;flex-wrap:wrap;justify-content:center;gap:30px;margin-top:40px}
-.card{background:rgba(20,20,20,0.9);border:1px solid #2a2a2a;border-radius:16px;padding:30px;width:280px;transition:.35s}
-.card:hover{transform:translateY(-8px) scale(1.04);box-shadow:0 0 25px rgba(255,255,255,0.05)}
+.card{background:linear-gradient(180deg,#111,#0a0a0a);border:1px solid #222;border-radius:20px;padding:30px;width:280px;transition:.4s;position:relative;overflow:hidden}
+.card::before{content:'';position:absolute;width:120%;height:120%;background:radial-gradient(circle,rgba(255,255,255,0.08),transparent);top:-20%;left:-20%;opacity:0;transition:.4s}
+.card:hover::before{opacity:1}
+.card:hover{transform:translateY(-10px) scale(1.05)}
 
 .card img{width:90px;height:90px;border-radius:50%;margin-bottom:15px;border:2px solid #333;object-fit:cover}
 .name{font-weight:600;font-size:1.2rem}
@@ -48,13 +54,14 @@ p{color:#9a9a9a;max-width:600px}
 .link{color:#bdbdbd;text-decoration:none}
 .link:hover{color:#fff}
 
-.fade{opacity:0;transform:translateY(40px);transition:1s}
+.fade{opacity:0;transform:translateY(50px);transition:1s}
 .show{opacity:1;transform:translateY(0)}
 
 .cursor{display:inline-block;width:2px;height:1em;background:#fff;margin-left:4px;animation:blink .7s infinite}
 @keyframes blink{50%{opacity:0}}
 
-.bg{position:fixed;width:600px;height:600px;background:radial-gradient(circle,rgba(255,255,255,0.04),transparent);top:30%;left:50%;transform:translateX(-50%);filter:blur(100px);z-index:-1}
+.updates-box{margin-top:30px;padding:25px 35px;border-radius:16px;background:#0d0d0d;border:1px solid #222}
+.updates-box p{color:#cfcfcf}
 </style>
 </head>
 
@@ -63,11 +70,13 @@ p{color:#9a9a9a;max-width:600px}
 <div class="bg"></div>
 
 <div class="nav">
-<button onclick="scrollToSection('general')">General Info</button>
-<button onclick="scrollToSection('team')">Meet The Team</button>
+<button onclick="scrollToSection('general')">Home</button>
+<button onclick="scrollToSection('team')">Team</button>
+<button onclick="scrollToSection('updates')">Updates</button>
 </div>
 
 <div id="general" class="section fade">
+<div class="hero">
 <h1 id="title"></h1>
 <p id="subtitle"></p>
 
@@ -78,8 +87,9 @@ p{color:#9a9a9a;max-width:600px}
 </div>
 
 <p style="margin-top:25px">
-California State Prison is a Roblox Prison RP game that was in development for years before finnaly it got released! We hope you enjoy the game and feel free to reach out to us in our discord server.
+California State Prison is a Roblox Prison RP game that was in development for years before finally being released. We hope you enjoy the experience and connect with us through our Discord community.
 </p>
+</div>
 </div>
 
 <div id="team" class="section fade">
@@ -100,7 +110,6 @@ California State Prison is a Roblox Prison RP game that was in development for y
 <div class="info">
 <div><span>Roblox:</span> <a class="link" href="https://www.roblox.com/users/2767974107/profile" target="_blank">MhzBaby4047</a></div>
 </div>
-
 </div>
 
 <div class="card">
@@ -116,9 +125,15 @@ California State Prison is a Roblox Prison RP game that was in development for y
 <div class="info">
 <div><span>Roblox:</span> <a class="link" href="https://www.roblox.com/users/3745240218/profile" target="_blank">markthebark2116</a></div>
 </div>
-
 </div>
 
+</div>
+</div>
+
+<div id="updates" class="section fade">
+<h2>Updates</h2>
+<div class="updates-box">
+<p>None right now.</p>
 </div>
 </div>
 
@@ -131,7 +146,7 @@ function typeTitle(){
 if(i<titleText.length){
 document.getElementById("title").innerHTML+=titleText.charAt(i);
 i++;
-setTimeout(typeTitle,20);
+setTimeout(typeTitle,15);
 }else{
 document.getElementById("title").innerHTML+='<span class="cursor"></span>';
 typeSub();
@@ -142,7 +157,7 @@ function typeSub(){
 if(j<subText.length){
 document.getElementById("subtitle").innerHTML+=subText.charAt(j);
 j++;
-setTimeout(typeSub,18);
+setTimeout(typeSub,12);
 }
 }
 
