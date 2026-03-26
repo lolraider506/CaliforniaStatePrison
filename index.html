@@ -18,6 +18,22 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Inter',sans-serif}
 body{background:#0a0a0a;color:#fff;overflow-x:hidden;transition:background .4s}
+
+#loader{position:fixed;top:0;left:0;width:100%;height:100%;background:#0a0a0a;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:9999;transition:opacity .8s ease,visibility .8s}
+#loader.hide{opacity:0;visibility:hidden}
+.loader-title{font-size:2.2rem;font-weight:800;margin-bottom:25px;letter-spacing:1px}
+.loader-bar{width:200px;height:4px;background:#1a1a1a;border-radius:10px;overflow:hidden}
+.loader-progress{height:100%;width:0;background:#fff;animation:load 2.5s ease forwards}
+@keyframes load{0%{width:0}100%{width:100%}}
+.loader-dots{margin-top:20px;display:flex;gap:8px}
+.loader-dots div{width:8px;height:8px;background:#555;border-radius:50%;animation:bounce 1.2s infinite}
+.loader-dots div:nth-child(2){animation-delay:.2s}
+.loader-dots div:nth-child(3){animation-delay:.4s}
+@keyframes bounce{0%,80%,100%{transform:scale(0)}40%{transform:scale(1)}}
+
+#main{opacity:0;transform:scale(1.02);transition:opacity 1s ease,transform 1s ease}
+#main.show{opacity:1;transform:scale(1)}
+
 canvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:-2}
 .bg-static{position:fixed;width:100%;height:100%;background:linear-gradient(180deg,#0a0a0a,#1a1a1a);z-index:-3;opacity:0;transition:.4s}
 .nav{position:fixed;top:0;width:100%;display:flex;justify-content:center;gap:12px;padding:14px;background:rgba(0,0,0,0.7);backdrop-filter:blur(12px);z-index:100;border-bottom:1px solid #1f1f1f}
@@ -34,9 +50,6 @@ p{color:#a0a0a0;max-width:650px}
 .card{background:#0e0e0e;border:1px solid #222;border-radius:20px;padding:30px;width:280px;transition:.4s;opacity:0;transform:translateY(40px) scale(.95)}
 .card.show{opacity:1;transform:translateY(0) scale(1)}
 .card:hover{transform:translateY(-12px) scale(1.06)}
-.card.owner:hover{box-shadow:0 0 25px rgba(255,215,0,0.4)}
-.card.dev:hover{box-shadow:0 0 25px rgba(0,170,255,0.4)}
-.card.codev:hover{box-shadow:0 0 25px rgba(170,255,255,0.4)}
 .card img{width:90px;height:90px;border-radius:50%;margin-bottom:15px;border:2px solid #333;object-fit:cover}
 .name{font-weight:600;font-size:1.2rem}
 .role{color:#888;font-size:0.9rem;margin-bottom:15px}
@@ -56,6 +69,14 @@ p{color:#a0a0a0;max-width:650px}
 </head>
 
 <body>
+
+<div id="loader">
+<div class="loader-title">Welcome to California State Prison</div>
+<div class="loader-bar"><div class="loader-progress"></div></div>
+<div class="loader-dots"><div></div><div></div><div></div></div>
+</div>
+
+<div id="main">
 
 <canvas id="bg"></canvas>
 <div class="bg-static" id="staticBg"></div>
@@ -85,46 +106,24 @@ California State Prison is a Roblox Prison RP game that was in development for y
 
 <div id="team" class="section fade">
 <h2>Meet the Team</h2>
-
 <div class="team">
 
-<div class="card owner">
+<div class="card">
 <img src="owner.jpg">
 <div class="name">mhzbaby1199193</div>
 <div class="role">Owner</div>
-<div class="info">
-<div><span>Discord:</span> mhzbaby1199193</div>
-<div><span>User ID:</span> 1389111097629474900</div>
-</div>
-<div class="info">
-<div><span>Roblox:</span> <a class="link" href="https://www.roblox.com/users/2767974107/profile" target="_blank">MhzBaby4047</a></div>
-</div>
 </div>
 
-<div class="card dev">
+<div class="card">
 <img src="dev1.jpg">
 <div class="name">joshua_neww</div>
 <div class="role">Lead Developer</div>
-<div class="info">
-<div><span>Discord:</span> joshua_neww</div>
-<div><span>User ID:</span> 1465833498949455873</div>
-</div>
-<div class="info">
-<div><span>Roblox:</span> <a class="link" href="https://www.roblox.com/users/3745240218/profile" target="_blank">markthebark2116</a></div>
-</div>
 </div>
 
-<div class="card codev">
+<div class="card">
 <img src="devuser.jpg">
 <div class="name">robloxdevuser</div>
 <div class="role">Co Developer</div>
-<div class="info">
-<div><span>Discord:</span> robloxdevuser</div>
-<div><span>User ID:</span> 1462424375784505470</div>
-</div>
-<div class="info">
-<div><span>Roblox:</span> <a class="link" href="https://www.roblox.com/users/10607159074/profile?friendshipSourceType=PlayerSearch" target="_blank">Devuserx</a></div>
-</div>
 </div>
 
 </div>
@@ -137,11 +136,19 @@ California State Prison is a Roblox Prison RP game that was in development for y
 </div>
 </div>
 
+</div>
+
 <script>
+setTimeout(()=>{
+document.getElementById("loader").classList.add("hide");
+document.getElementById("main").classList.add("show");
+},2600);
+
 const canvas=document.getElementById("bg");
 const ctx=canvas.getContext("2d");
 let w,h,particles=[],anim=true;
-function resize(){w=canvas.width=window.innerWidth;h=canvas.height=window.innerHeight;}window.addEventListener("resize",resize);resize();
+function resize(){w=canvas.width=window.innerWidth;h=canvas.height=window.innerHeight;}
+window.addEventListener("resize",resize);resize();
 for(let i=0;i<60;i++){particles.push({x:Math.random()*w,y:Math.random()*h,vx:(Math.random()-0.5)*0.4,vy:(Math.random()-0.5)*0.4});}
 function draw(){if(!anim)return;ctx.clearRect(0,0,w,h);for(let i=0;i<particles.length;i++){let p=particles[i];p.x+=p.vx;p.y+=p.vy;if(p.x<0||p.x>w)p.vx*=-1;if(p.y<0||p.y>h)p.vy*=-1;ctx.fillStyle="rgba(255,255,255,0.25)";ctx.beginPath();ctx.arc(p.x,p.y,1.8,0,Math.PI*2);ctx.fill();for(let j=i+1;j<particles.length;j++){let p2=particles[j];let dx=p.x-p2.x;let dy=p.y-p2.y;let dist=Math.sqrt(dx*dx+dy*dy);if(dist<140){ctx.strokeStyle="rgba(255,255,255,"+(1-dist/140)*0.15+")";ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(p2.x,p2.y);ctx.stroke();}}}requestAnimationFrame(draw);}draw();
 function toggleAnim(){anim=!anim;document.getElementById("staticBg").style.opacity=anim?0:1;if(anim)draw();}
@@ -149,7 +156,9 @@ const titleText="California State Prison";const subText="Official Information Hu
 function typeTitle(){if(i<titleText.length){document.getElementById("title").innerHTML+=titleText.charAt(i);i++;setTimeout(typeTitle,10);}else{document.getElementById("title").innerHTML+='<span class="cursor"></span>';typeSub();}}
 function typeSub(){if(j<subText.length){document.getElementById("subtitle").innerHTML+=subText.charAt(j);j++;setTimeout(typeSub,8);}}
 typeTitle();
-function scrollToSection(id){document.getElementById(id).scrollIntoView({behavior:'smooth'});}const observer=new IntersectionObserver(entries=>{entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add("show");}});});document.querySelectorAll(".fade,.card").forEach(el=>observer.observe(el));
+function scrollToSection(id){document.getElementById(id).scrollIntoView({behavior:'smooth'});}
+const observer=new IntersectionObserver(entries=>{entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add("show");}});});
+document.querySelectorAll(".fade,.card").forEach(el=>observer.observe(el));
 </script>
 
 </body>
